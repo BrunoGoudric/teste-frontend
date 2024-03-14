@@ -12,8 +12,41 @@ import {
 } from "../styles/pages/Home";
 import { FaLinkedinIn } from "react-icons/fa";
 import TableHeader from "../components/TableHeader";
+import ListUsers from "../components/ListUsers";
+import { useEffect, useState } from "react";
+import { useApi } from "../hooks/useApi";
+import { UserProps } from "../types/User";
+
+const titleTable = [
+  { id: 0, titleName: "Nome"},
+  { id: 1, titleName: "CPF"},
+  { id: 2, titleName: "RG"},
+  { id: 3, titleName: "Data de Nascimento"},
+  { id: 4, titleName: "E-mail"},
+  { id: 5, titleName: "Telefone"},
+  { id: 6, titleName: "Endereço"},
+  { id: 7, titleName: "Setor"},
+  { id: 8, titleName: "Cargo"},
+  { id: 9, titleName: "Empresa"},
+]
+
 
 export default function Home() {
+  const [user, setUser] = useState<UserProps | null>(null);
+  const api = useApi();
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await api.listUser();
+      if(data.user){
+        setUser(data.user)
+      }
+      
+    }
+
+    getUsers();
+  }, [])
+
+
   return (
     <MainContainer>
       <Head>
@@ -33,6 +66,7 @@ export default function Home() {
           </Header>
       <ContentContainer>
         <TableHeader />
+        <ListUsers title={titleTable} users={user} />
       </ContentContainer>
 
       <Footer>
