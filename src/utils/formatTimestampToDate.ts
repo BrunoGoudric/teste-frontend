@@ -1,4 +1,4 @@
-function formatTimestampToDate(timestamp: number) {
+export function formatTimestampToDate(timestamp: number) {
     const data = new Date(timestamp * 1000);
   
     const dia = data.getDate();

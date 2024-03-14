@@ -1,9 +1,9 @@
 type User = {
   id: number;
-  name: string;
+  fullname: string;
   cpf: number;
   rg: number;
-  dt_nascimento: number;
+  dt_birthday: number;
   email: string;
   fone: number;
   address: string;

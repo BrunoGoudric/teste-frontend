@@ -1,29 +1,14 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API,
+  baseURL: process.env.NEXT_PUBLIC_REACT_APP_API,
 });
+
 
 export const useApi = () => ({
   listUser: async () => {
-    return {
-      user: [
-        {
-          id: 1,
-          name: "Bruno Ferreira dos Santos Silva",
-          cpf: 35261460808,
-          rg: 383625609,
-          dt_nascimento: 619488000,
-          email: "brunolfsports@hotmail.com",
-          fone: 11969704753,
-          address: "Rua Antõnio Pires dos Santos, 162 - Pq Doroteia - SP",
-          sector: "T.I",
-          position: "Desenvolvedor Frontend",
-          company: 1,
-          status: "Ativo",
-        },
-      ],
-    };
+    const response = await api.get("/user");
+    return response.data;
   },
   createClient: async (
     name: string,

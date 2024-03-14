@@ -37,8 +37,9 @@ export default function Home() {
   useEffect(() => {
     const getUsers = async () => {
       const data = await api.listUser();
-      if(data.user){
-        setUser(data.user)
+
+      if(data){
+        setUser(data)
       }
       
     }

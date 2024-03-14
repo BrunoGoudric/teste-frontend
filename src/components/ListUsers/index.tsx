@@ -1,3 +1,4 @@
+import { formatTimestampToDate } from "../../utils/formatTimestampToDate";
 import { Container } from "./styles";
 import { LayoutProps } from "./types";
 
@@ -16,10 +17,10 @@ export default function ListUsers({ title, users }: LayoutProps) {
         <tbody>
             {users !== null && users.map((item) => (
                 <tr key={String(item.id)}>
-                <td>{item.name}</td>
+                <td>{item.fullname}</td>
                 <td>{item.cpf}</td>
                 <td>{item.rg}</td>
-                <td>{item.dt_nascimento}</td>
+                <td>{formatTimestampToDate(item.dt_birthday)}</td>
                 <td>{item.email}</td>
                 <td>{item.fone}</td>
                 <td>{item.address}</td>

@@ -16,16 +16,16 @@ export const Container = styled.div`
             color: #000;
             background: #fff;
             width: 100%;
-            height: 48px;
+            height: 55px;
             text-align: center;
 
            > tr {
-            > td:nth-child(1) {
-                border-bottom-left-radius: 12px;
+            
+            > td{
+                height: 55px;
             }
 
             >td:nth-child(11){
-                border-bottom-right-radius: 12px;
 
                 .btnEdit{
                     width: 90px;
