@@ -30,40 +30,21 @@ export const Container = styled.div`
             font-weight: bold;
         }
 
+        .btnReset{
+            width: 78px;
+            height: 35px;
+            border-radius: 12px;
+            border: none;
+            background: #DBF6F8;
+            font-weight: bold;
+        }
+
+        .btnReset:hover{
+
+        }
+
         
     }
 
-    .boxSearch{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        gap: 25px;
-
-        > input{
-            width: 433px;
-            height: 53px;
-            border-radius: 12px;
-            border: none;
-            padding: 0 20px;
-        }
-
-        > button {
-            width: 140px;
-            height: 53px;
-            border-radius: 12px;
-            border: none;
-
-            color: #fff;
-            font-size: 18px;
-            background: #023D68;
-            font-weight: bold;
-            transition: 0.2ms;
-
-        }
-
-        > button:hover{
-            background: #09568E;
-        }
-    }
+    
 `;

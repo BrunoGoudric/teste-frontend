@@ -25,4 +25,8 @@ export const useApi = () => ({
     const response = await api.post("/create");
     return response.data;
   },
+  searchCompany: async (company: number) => {
+    const response = await api.get(`/searchCompany?company=${company}`);
+    return response.data;
+   } 
 });

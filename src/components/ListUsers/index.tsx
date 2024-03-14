@@ -29,7 +29,7 @@ export default function ListUsers({ title, users }: LayoutProps) {
                 <td>{item.company}</td>
                 <td className="boxAction">
                     <button className="btnEdit">Editar</button>
-                    <button className="btnDel">Deletar</button>
+                    <button className="btnDel">Desativar</button>
                 </td>
                 </tr>
             ))}

@@ -32,18 +32,17 @@ const titleTable = [
 
 
 export default function Home() {
-  const [user, setUser] = useState<UserProps | null>(null);
+  const [user, setUser] = useState<UserProps>([]);
   const api = useApi();
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await api.listUser();
+  const getUsers = async () => {
+    const data = await api.listUser();
 
-      if(data){
-        setUser(data)
-      }
-      
+    if(data){
+      setUser(data)
     }
-
+    
+  }
+  useEffect(() => {
     getUsers();
   }, [])
 
@@ -66,7 +65,7 @@ export default function Home() {
             </LogoContainer>
           </Header>
       <ContentContainer>
-        <TableHeader />
+        <TableHeader reset={getUsers} setUser={setUser}/>
         <ListUsers title={titleTable} users={user} />
       </ContentContainer>
 
