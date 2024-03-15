@@ -18,9 +18,8 @@ export default function ModalEdit({modalIsOpen, closeModal, msgApi, reset, setMs
         resolver: yupResolver(RegisterValidationSchema),
       });
      
-      const { email, fone, dt_birthday} = watch();
+      const { email, fone } = watch();
 
-      console.log("dt_birthday=", dt_birthday)
 
       const onSubmit = async (data: RegisterProps) => {
         const response = await api.updateClient(
