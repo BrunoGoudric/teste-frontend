@@ -83,7 +83,7 @@ export default function ModalEdit({modalIsOpen, closeModal, msgApi, reset, setMs
               height: "50px",
             }}
           >
-            <h2>Cadastro de Funcionários</h2>
+            <h2>Edição dos dados do Funcionários</h2>
             <button
               onClick={closeModal}
               style={{

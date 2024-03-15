@@ -1,51 +1,76 @@
-# Desafio Desenvolvedor Front-end Pleno - Onyma
-
-Neste desafio você deverá construir uma interface de cadastro de funcionários para empresas de RH.
-
-## Contexto
-
-Neste cenário proposto, a área de RH de empresas clientes utilizam de nossa interface para cadastrar funcionários que poderão ou não realizar exames ocupacionais.
-
-A interface deve permitir que o usuário escolha em qual das empresas o novo funcionário será inserido, sendo que um funcionário não pode estar ativo em duas empresas ao mesmo tempo.
-
-Você desenvolverá uma página única que mostre a lista de usuários de cada empresa separadamente, permitindo que os dados sejam alterados ou excluídos, além de um modal de form que permita o cadastro de novos funcionários.
-
-## Observações
-- Os dados das empresas e funcionários para listagem e filtragem podem utilizar _mocks_ ou uma fake API *(ex: json-server)*, não é necessário desenvolver uma API para o desafio.
+# Teste De Frontend para empresa BenCorp
+> Está aplicação foi criada para fins de avaliação do meu trabalho profissional
 
 
-## Requisitos
+![](public/assets/projeto.jpg)
 
-Você deve criar um serviço com os seguintes requisitos:
+## Instalação
 
-1. Requisitos gerais
-   - A aplicação deve ser desenvolvida utilizando NextJS
-   - O projeto deve ter um README.md com todas as instruções sobre como executar e testar o projeto
-   - O projeto deve utilizar Git como ferramenta de controle de versão
-   - *Possuir testes automatizados é um diferencial*
-   - *Estratégias de SEO são um diferencial*
-1. Requisitos da página
-    1. Cadastro de funcionários
-        - Deve ser possível cadastrar novos funcionários para a empresa.
-       - Cada funcionário deve ter nome, CPF, RG, data de nascimento, email, telefone, endereço, setor e cargo.
-        - Todos os campos são obrigatórios, exceto email e telefone.
-        - É obrigatório ter um email OU um telefone.
-        - Não pode haver dois funcionários com o mesmo CPF (inclusive em empresas diferentes)
-        - O funcionário não pode estar **ativo** em duas empresas
-        - O endereço do funcionário deve ser capturado automaticamente *(ex: latitude/longitude do browser + Geocoding API)*
-        - *Cadastro em lote/batch [adicional]*
-    2. Lista dos funcionários
-        - A página deve conter a lista dos funcionários cadastrados.
-        - Deve ser possível inativar um funcionário em determinada empresa (o registro continua, mas com status inativo).
-        - Deve ser possível alterar um funcionário ao clicar no card listado.
-        - *Alterar a ordem dos cards (drag and drop) [adicional]*
+```sh
+npm install
+yarn install
+```
+
+## Execut
+
+```sh
+npm run dev
+yarn dev
+```
+## Backend da Aplicação
+
+O backend da aplicação foi criado separado para fins de estudo e se encontra 
+no link abaixo:
+
+1. Faça o clone do projeto (<https://github.com/BrunoGoudric/backend-teste-frontend>)
+2. Faça a instalação dos pacotes, como no exemplo abaixo:
+
+```sh
+npm install
+yarn install
+```
+3. Execute o projeto
+
+```sh
+npm run dev
+yarn dev
+```
+## Tela Inicial
+
+![](public/assets/projeto.jpg)
+
+1. Aqui temos 4 botões na parte superior;
+2. O primeiro da esquesda para a direita filtra todos os funcionários da empresa 1
+3. O segundo da esquesda para a direita filtra todos os funcionários da empresa 2
+4. O terceiro da esquesda para a direita faz um reset dos filtros aplicados
+5. O ultimo botão abre um modal para Cadastrar Novos Funcionários
+6. Abaixo temos a lista de funcionários e dois botões de ação na ultima coluna
+7. Primeiro botão faz a edição dos dados cadastrados
+8. Segundo botão "Desativa" e "Ativa" o funcionário
 
 
-## Avaliação
+## Cadastro de Funcionário
 
-1. O teste deve ser clonado em seu repositório do Github e, após finalizado, a URL do repositório deverá ser enviada para o contato que lhe enviou o teste
-2. Uma breve explicação das decisões tomadas deverá ser enviada para nós, da forma que for acordado entre você e quem lhe enviou o desafio.
-3. A avaliação ocorrerá com base na arquitetura, design e qualidade do código, entendimento das regras de negócio, tolerância a falhas e o quão preparado esse serviço estaria para ser rodado em produção.
-4. Existem algumas funcionalidades adicionais. Apesar de não serem obrigatórias, terão peso considerável na avaliação.
-4. Achamos que entre **5 a 7 dias** é tempo suficiente para a finalização, mas caso sua disponibilidade exija mais tempo, avise a gente com, pelo menos, 1 dia de antecedência do prazo final.
-5. Boa sorte.
+![](public/assets/register.jpg)
+
+1. Nesse modal é possível realizar o registro do novo funcionário
+2. Não pode cadastrar 2 funcionários com o mesmo CPF;
+3. Ao Cadastrar você é obrigado a informar ou o Email ou o Telefone
+4. É preciso informar a Empresa que o funcionário trabalha através do número 1 ou 2
+5. É necessário atorizar a localização do browser quando solicitado conforme imagem abaixo:
+
+![](public/assets/geolocation.jpg)
+
+6. Ao fazer o procedimento acima a API GeoLocalização vai conseguir preencher o endereço sozinho do formulário de Registro
+
+## Edição de Dados do Funcionário
+
+![](public/assets/edicao.jpg)
+
+1. Nessa parte é possível realizar a atualização dos dados do funcionário
+
+## Alterando Status do Funcionário
+
+![](public/assets/status.jpg)
+
+1. Ao realizar a desativação do funcionário o botão é modificado e permitir caso tenha tenha necessidade realizar a Ativação novamente
