@@ -1,4 +1,4 @@
-import { formatTimestampToDate } from "../../utils/formatTimestampToDate";
+import { formatDate } from "../../utils/formatDate";
 import { Container } from "./styles";
 import { LayoutProps } from "./types";
 
@@ -20,7 +20,7 @@ export default function ListUsers({ title, users }: LayoutProps) {
                 <td>{item.fullname}</td>
                 <td>{item.cpf}</td>
                 <td>{item.rg}</td>
-                <td>{formatTimestampToDate(item.dt_birthday)}</td>
+                <td>{formatDate(item.dt_birthday)}</td>
                 <td>{item.email}</td>
                 <td>{item.fone}</td>
                 <td>{item.address}</td>
@@ -29,7 +29,7 @@ export default function ListUsers({ title, users }: LayoutProps) {
                 <td>{item.company}</td>
                 <td className="boxAction">
                     <button className="btnEdit">Editar</button>
-                    <button className="btnDel">Desativar</button>
+                    <button className="btnDes">Desativar</button>
                 </td>
                 </tr>
             ))}

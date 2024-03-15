@@ -3,7 +3,7 @@ type User = {
   fullname: string;
   cpf: number;
   rg: number;
-  dt_birthday: number;
+  dt_birthday: string;
   email: string;
   fone: number;
   address: string;
