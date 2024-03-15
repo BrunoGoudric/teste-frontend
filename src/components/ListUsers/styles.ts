@@ -25,7 +25,7 @@ export const Container = styled.div`
                 height: 55px;
             }
 
-            >td:nth-child(11){
+            >td:nth-child(12){
 
                 .btnEdit{
                     width: 90px;
@@ -34,12 +34,23 @@ export const Container = styled.div`
                     border: none;
                 }
 
-                .btnDel{
+                .btnDes{
                     width: 90px;
                     height: 36px;
                     border-radius: 12px;
                     border: none;
                     background: red;
+                    color: #fff;
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
+
+                .btnAt{
+                    width: 90px;
+                    height: 36px;
+                    border-radius: 12px;
+                    border: none;
+                    background: green;
                     color: #fff;
                     font-weight: bold;
                     margin-left: 5px;

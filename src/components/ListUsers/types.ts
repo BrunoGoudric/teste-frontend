@@ -8,4 +8,5 @@ export interface titleProps {
 export interface LayoutProps{
     title: titleProps[]
     users: UserProps
+    updatePage: () => void;
 }

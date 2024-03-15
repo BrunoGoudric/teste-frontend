@@ -6,39 +6,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Modal from "react-modal";
 import { RegisterValidationSchema } from "./validation";
 import { useForm } from "react-hook-form";
-import InputMask from 'react-input-mask';
-
-const customStyles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(255, 255, 255, 0.75)",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "750px",
-  },
-};
+import InputMask from "react-input-mask";
 
 export default function TableHeader({ reset, setUser }: LayoutProps) {
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState("");
+  const [msgApi, setMsgApi] = useState("");
   const api = useApi();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: yupResolver(RegisterValidationSchema),
   });
@@ -60,6 +42,7 @@ export default function TableHeader({ reset, setUser }: LayoutProps) {
     setIsOpen(false);
   }
 
+  const { email, fone} = watch();
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -96,7 +79,7 @@ export default function TableHeader({ reset, setUser }: LayoutProps) {
   };
 
   const onSubmit = async (data: RegisterProps) => {
-    const isLogged = await api.createClient(
+    const response = await api.createClient(
       data.fullname,
       data.cpf,
       data.rg,
@@ -110,7 +93,12 @@ export default function TableHeader({ reset, setUser }: LayoutProps) {
       "Ativo"
     );
 
-    console.log("isLogged=", isLogged)
+    if (response.includes("success")) {
+      closeModal();
+      reset();
+    } else {
+      setMsgApi(response);
+    }
   };
 
   useEffect(() => {
@@ -142,7 +130,7 @@ export default function TableHeader({ reset, setUser }: LayoutProps) {
           onRequestClose={closeModal}
           style={{
             content: {
-              top: "50%",
+              top: "49%",
               left: "50%",
               right: "auto",
               bottom: "auto",
@@ -177,58 +165,203 @@ export default function TableHeader({ reset, setUser }: LayoutProps) {
               X
             </button>
           </div>
-          <form style={{ height: "800px"}}>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
-              <label htmlFor="">Nome</label>
-              <input type="text" {...register("fullname")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.fullname?.message}</p>
+          <div>
+            <p style={{ marginBottom: "5px", color: "red" }}>
+              {msgApi === "User already exists!" ? "Já existe um usúario com esse CPF!" : ""}
+            </p>
+          </div>
+          <form style={{ height: "800px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
+              <label htmlFor="" style={{ marginBottom: "2px"}}>Nome</label>
+              <input
+                type="text"
+                {...register("fullname")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.fullname?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">CPF</label>
-              <InputMask mask={"999.999.999-99"} type="text" {...register("cpf")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.cpf?.message}</p>
+              <InputMask
+                mask={"999.999.999-99"}
+                type="text"
+                {...register("cpf")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.cpf?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">RG</label>
-              <InputMask mask={"99.999.999-9"} type="text" {...register("rg")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.rg?.message}</p>
+              <InputMask
+                mask={"99.999.999-9"}
+                type="text"
+                {...register("rg")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.rg?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">Data de Nascimento</label>
-              <input type="date" {...register("dt_birthday")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.dt_birthday?.message}</p>
+              <input
+                type="date"
+                {...register("dt_birthday")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.dt_birthday?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">E-mail</label>
-              <input type="email" {...register("email")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.email?.message}</p>
+              <input
+                type="email"
+                {...register("email")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {email === "" && fone === "" ? "Informar o E-mail / Telefone" :errors.email?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">Telefone</label>
-              <InputMask mask={"(99) 99999-9999"} type="text" {...register("fone")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.fone?.message}</p>
+              <InputMask
+                mask={"(99) 99999-9999"}
+                type="text"
+                {...register("fone")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.fone?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">Endereço</label>
-              <input type="text" {...register("address")} style={{ height: "40px", paddingLeft: "10px"}} defaultValue={address} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.address?.message}</p>
+              <input
+                type="text"
+                {...register("address")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+                defaultValue={address}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.address?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">Setor</label>
-              <input type="text" {...register("sector")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.sector?.message}</p>
+              <input
+                type="text"
+                {...register("sector")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.sector?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">Cargo</label>
-              <input type="text" {...register("position")} style={{ height: "40px", paddingLeft: "10px"}} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.position?.message}</p>
+              <input
+                type="text"
+                {...register("position")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.position?.message}
+              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", height: "75px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "75px",
+              }}
+            >
               <label htmlFor="">Empresa</label>
-              <input type="number" {...register("company")} style={{ height: "40px", paddingLeft: "10px"}} min={1} max={2} />
-              <p style={{ marginBottom: "5px", color: "red"}}>{errors.company?.message}</p>
+              <input
+                type="number"
+                {...register("company")}
+                style={{ height: "40px", paddingLeft: "10px" }}
+                min={1}
+                max={2}
+              />
+              <p style={{ marginBottom: "5px", color: "red" }}>
+                {errors.company?.message}
+              </p>
             </div>
-            <button onClick={handleSubmit(onSubmit)}>Registrar</button>
+            <button
+              style={{
+                width: "90px",
+                height: "36px",
+                borderRadius: "12px",
+                border: "none",
+                background: email === "" && fone === "" ? "gray" : "green",
+                color: "#fff",
+                fontWeight:"bold"
+              }}
+              onClick={handleSubmit(onSubmit)}
+              disabled={email === "" && fone === "" ? true : false}
+            >
+              Registrar
+            </button>
           </form>
         </Modal>
       </Container>

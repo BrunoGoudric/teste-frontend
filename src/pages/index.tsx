@@ -28,6 +28,7 @@ const titleTable = [
   { id: 7, titleName: "Setor"},
   { id: 8, titleName: "Cargo"},
   { id: 9, titleName: "Empresa"},
+  { id: 10, titleName: "Status"},
 ]
 
 
@@ -66,7 +67,7 @@ export default function Home() {
           </Header>
       <ContentContainer>
         <TableHeader reset={getUsers} setUser={setUser}/>
-        <ListUsers title={titleTable} users={user} />
+        <ListUsers title={titleTable} users={user} updatePage={getUsers} />
       </ContentContainer>
 
       <Footer>

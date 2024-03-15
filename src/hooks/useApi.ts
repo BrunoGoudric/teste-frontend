@@ -41,8 +41,8 @@ export const useApi = () => ({
     const response = await api.get(`/searchCompany?company=${company}`);
     return response.data;
   },
-  disableUser: async (id: string) => {
-    const response = await api.post(`/disable?id=${id}`);
+  updateStatus: async (id: string, status: string) => {
+    const response = await api.post('/disable', { id: id, status});
     return response.data;
   }
 });
