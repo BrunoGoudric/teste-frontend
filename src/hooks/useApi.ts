@@ -44,5 +44,35 @@ export const useApi = () => ({
   updateStatus: async (id: string, status: string) => {
     const response = await api.post('/disable', { id: id, status});
     return response.data;
-  }
+  },
+  updateClient: async (
+    id: string,
+    name: string,
+    cpf: string,
+    rg: string,
+    dt_birthday: Date,
+    email: string,
+    fone: string,
+    address: string,
+    sector: string,
+    position: string,
+    company: number,
+    status: string
+  ) => {
+    const response = await api.post("/updateUser", {
+      id,
+      fullname: name,
+      cpf,
+      rg,
+      dt_birthday,
+      email,
+      fone,
+      address,
+      sector,
+      position,
+      company,
+      userStatus: status,
+    });
+    return response.data;
+  },
 });
