@@ -79,7 +79,7 @@ export default function TableHeader({ reset, setUser }: LayoutProps) {
   const getAdrress = async () => {
     try {
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyB5fH2KqcBGUmCIAiq9nSCE_0OhqxepYWA`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.NEXT_PUBLIC_REACT_GEOAPI_KEY}`
       );
       const data = await response.json();
 
